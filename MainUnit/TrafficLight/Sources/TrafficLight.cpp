@@ -31,8 +31,6 @@ void TrafficLight::execute()
     while(!mManager.checkExit()) {
         mKeyBoard.checkButtons();
         mMailOffice.processMails();
-        if (mManager.checkExit()) {
-            break;
-        }
+
     }
 }
