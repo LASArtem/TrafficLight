@@ -1,0 +1,138 @@
+# depslib dependency file v1.0
+1532699072 source:d:\test\c++\glava_3\task\trafficlight\main.cpp
+	<stdio.h>
+	"MainUnit/TrafficLight/Headers/TrafficLight.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\trafficlight\headers\trafficlight.hpp
+	"../../Support/keyboard/Headers/Keyboard.hpp"
+	"../../Support/mails/Headers/MailOffice.hpp"
+	"../../Support/manager/Headers/Manager.hpp"
+	"../../Support/stateMachine/Headers/StateMachine.hpp"
+	"../../Support/timer/Headers/Timer.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\keyboard\headers\keyboard.hpp
+	"KeyboardCtrl.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\keyboard\headers\keyboardctrl.hpp
+	"../../common/api_mails/IMailCtrl.hpp"
+	"Keyboard.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_mails\imailctrl.hpp
+	"../../mails/Headers/MailBox.hpp"
+	"../api_txtRecord/api_txtRecord.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\mails\headers\mailbox.hpp
+	<queue>
+	"../../common/api_mails/api_mailbox.hpp"
+	"../../common/api_mails/IMailCtrl.hpp"
+	"../../txtRecord/Headers/TxtRecord.hpp"
+	"MailOffice.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_mails\api_mailbox.hpp
+	<cstdint>
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\txtrecord\headers\txtrecord.hpp
+	<cstdio>
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\mails\headers\mailoffice.hpp
+	<queue>
+	<list>
+	"../../common/api_mails/api_mailbox.hpp"
+	"../../common/api_mails/IMailCtrl.hpp"
+	"MailBox.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_txtrecord\api_txtrecord.hpp
+	<cstdint>
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\manager\headers\manager.hpp
+	"ManagerCtrl.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\manager\headers\managerctrl.hpp
+	"../../common/api_mails/IMailCtrl.hpp"
+	"Manager.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\statemachine\headers\statemachine.hpp
+	"StateMachineCtrl.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\statemachine\headers\statemachinectrl.hpp
+	"../../common/api_mails/IMailCtrl.hpp"
+	"../../common/api_stateMachine/api_stateMachine.hpp"
+	"StateMachine.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_statemachine\api_statemachine.hpp
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\timer\headers\timer.hpp
+	"TimerCtrl.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\timer\headers\timerctrl.hpp
+	"../../common/api_mails/IMailCtrl.hpp"
+	"Timer.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_mails\imailctrl.cpp
+	"IMailCtrl.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\hmi\sources\hmi.cpp
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\hmi\sources\hmictrl.cpp
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\keyboard\sources\keyboard.cpp
+	<conio.h>
+	"../../common/api_keyboard/api_keyboard.hpp"
+	"../Headers/Keyboard.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_keyboard\api_keyboard.hpp
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\keyboard\sources\keyboardctrl.cpp
+	<cstring>
+	"../Headers/KeyboardCtrl.hpp"
+	"../../common/api_keyboard/api_keyboard.hpp"
+	"../../common/api_manager/api_manager.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_manager\api_manager.hpp
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\mails\sources\mailbox.cpp
+	"../../common/api_txtRecord/api_txtRecord.hpp"
+	"../Headers/MailBox.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\mails\sources\mailoffice.cpp
+	"../../common/api_txtRecord/api_txtRecord.hpp"
+	"../Headers/MailOffice.hpp"
+
+1532776864 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\manager\sources\manager.cpp
+	"../../common/api_stateMachine/api_stateMachine.hpp"
+	"../Headers/Manager.hpp"
+
+1532777556 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\manager\sources\managerctrl.cpp
+	<cstring>
+	"../Headers/ManagerCtrl.hpp"
+	"../../common/api_manager/api_manager.hpp"
+	"../../common/api_stateMachine/api_stateMachine.hpp"
+	"../../common/api_timer/api_timer.hpp"
+
+1532698381 d:\test\c++\glava_3\task\trafficlight\mainunit\support\common\api_timer\api_timer.hpp
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\statemachine\sources\statemachine.cpp
+	"../Headers/StateMachine.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\statemachine\sources\statemachinectrl.cpp
+	<cstring>
+	"../../common/api_stateMachine/api_stateMachine.hpp"
+	"../Headers/StateMachineCtrl.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\timer\sources\timer.cpp
+	"../../common/api_txtRecord/api_txtRecord.hpp"
+	"../Headers/Timer.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\timer\sources\timerctrl.cpp
+	<stdio.h>
+	"../../common/api_timer/api_timer.hpp"
+	"../Headers/TimerCtrl.hpp"
+
+1532698381 source:d:\test\c++\glava_3\task\trafficlight\mainunit\support\txtrecord\sources\txtrecord.cpp
+	<stdio.h>
+	"../../common/api_txtRecord/api_txtRecord.hpp"
+	"../Headers/TxtRecord.hpp"
+
+1532776251 source:d:\test\c++\glava_3\task\trafficlight\mainunit\trafficlight\sources\trafficlight.cpp
+	"../Headers/TrafficLight.hpp"
+
