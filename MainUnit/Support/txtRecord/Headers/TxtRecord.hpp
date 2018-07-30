@@ -14,6 +14,11 @@ public:
 private:
     TxtRecord();
     ~TxtRecord();
+
+    const char *getFileName();
+
+private:
+    const char *mFileNamePtr;
 };
 
 #endif //TXTRECORD_HPP
