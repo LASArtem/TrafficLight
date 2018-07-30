@@ -329,7 +329,7 @@ void ManagerCtrl::sendCommandGetCurrentTime()
 }
 
 //-----------------------------------------------------------------------------
-void ManagerCtrl::sendCommandStartCountTime()
+void ManagerCtrl::sendCommandStartCountTime(uint32_t sec)
 //-----------------------------------------------------------------------------
 {
     snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandStartCountTime", TXT::MANAGER_CTRL);
@@ -340,7 +340,8 @@ void ManagerCtrl::sendCommandStartCountTime()
     mail.destination = TIMER;
     mail.typeMail = COMMAND;
     mail.dataType = static_cast<uint32_t>(COMMAND_START_COUNT_TIME);
-    mail.dataSize = 0;
+    mail.dataSize = sizeof(uint32_t);
+    memcpy(mail.data, &sec, sizeof(uint32_t);
 
     sendMail(mail);
 }

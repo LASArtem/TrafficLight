@@ -11,6 +11,10 @@ public:
     ~Timer();
 
     const char *getName();
+
+    //notify
+    void notifyStartCountTime(uint32_t seconds);
+
 private:
     TimerCtrl *mCtlrPtr;
 };

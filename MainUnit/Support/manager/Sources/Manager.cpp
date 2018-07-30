@@ -91,7 +91,7 @@ void Manager::sendCommandStartCountTime()
 //-----------------------------------------------------------------------------
 {
     if (mCtlrPtr != nullptr) {
-        mCtlrPtr->sendCommandStartCountTime();
+        mCtlrPtr->sendCommandStartCountTime(3/*seconds*/);
     }
 }
 

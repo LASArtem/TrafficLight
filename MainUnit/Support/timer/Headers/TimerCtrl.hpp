@@ -23,6 +23,8 @@ private:
     void sendResponsePauseCountTime();
     void sendResponseCountinueCountTime();
 
+    void processCommandStartCountTime(MAIL &mail);
+
 private:
     Timer *mTimerPtr;
 };

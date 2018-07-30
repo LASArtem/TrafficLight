@@ -77,6 +77,7 @@ void TimerCtrl::parseCommand(MAIL &mail)
             , TXT::TIMER_CTRL, "COMMAND_START_COUNT_TIME");
         sendLog(TXT::message);
         sendResponseStartCountTime();
+        processCommandStartCountTime(mail);
         break;
 
     case COMMAND_PAUSE_COUNT_TIME:
@@ -171,4 +172,26 @@ void TimerCtrl::sendResponseCountinueCountTime()
     mail.dataSize = 0;
 
     sendMail(mail);
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::processCommandStartCountTime(MAIL &mail)
+//-----------------------------------------------------------------------------
+{
+    if (mail.dataSize != sizeof(uint32_t)) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandStartCountTime: %s"
+            , TXT::TIMER_CTRL, "wrong dataSize");
+        sendLog(TXT::message);
+        return;
+    }
+
+    uint32_t seconds;
+    memcpy(&seconds, mail.data, sizeof(uint32_t));
+    if (mTimerPtr != nullptr) {
+        mTimerPtr->notifyStartCountTime(seconds);
+    } else {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandStartCountTime: %s"
+            , TXT::TIMER_CTRL, "mTimerPtr != nullptr");
+        sendLog(TXT::message);
+    }
 }

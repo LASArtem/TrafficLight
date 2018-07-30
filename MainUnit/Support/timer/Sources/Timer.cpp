@@ -32,3 +32,14 @@ const char *Timer::getName()
 {
     return TXT::NAME_TIMER;
 }
+
+//-----------------------------------------------------------------------------
+void Timer::notifyStartCountTime(uint32_t seconds)
+//-----------------------------------------------------------------------------
+{
+    if (mCtlrPtr != nullptr) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: notifyStartCountTime: << %d seconds>>"
+            , TXT::TIMER_APPL, seconds);
+        mCtlrPtr->sendLog(TXT::message);
+    }
+}

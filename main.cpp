@@ -1,5 +1,3 @@
-#include <stdio.h> //printf
-
 #include "MainUnit/TrafficLight/Headers/TrafficLight.hpp"
 
 int main()
