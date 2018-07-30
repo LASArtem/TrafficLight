@@ -1,6 +1,6 @@
 #include <stdio.h> //printf
-#include <fstream>//ofstream
-#include <ctime> //for getFileName
+#include <fstream> //ofstream
+#include <ctime>   //for getFileName
 
 #include "../../common/api_txtRecord/api_txtRecord.hpp" //for names of component
 #include "../Headers/TxtRecord.hpp"
@@ -20,7 +20,7 @@ TxtRecord::TxtRecord()
 {
     mFileNamePtr = getFileName();
     snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: constructor of << %s >>"
-             , TXT::TXTRECORD_APPL, getName());
+        , TXT::TXTRECORD_APPL, getName());
     sendLog(TXT::message);
 }
 
@@ -29,9 +29,8 @@ TxtRecord::~TxtRecord()
 //-----------------------------------------------------------------------------
 {
     snprintf(TXT::message, TXT::BUFFER_SIZE, "%s:  destructor of << %s >>"
-             , TXT::TXTRECORD_APPL, getName());
+        , TXT::TXTRECORD_APPL, getName());
     sendLog(TXT::message);
-
 }
 
 //-----------------------------------------------------------------------------
