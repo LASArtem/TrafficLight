@@ -116,6 +116,7 @@ void ManagerCtrl::parseCommandFromKeyBoard(MAIL &mail)
         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommandFromKeyBoard: %s"
             , TXT::MANAGER_CTRL, "COMMAND_USER_PRESS_EXIT");
         sendLog(TXT::message);
+        processCommandUserPressExit();
         break;
 
     default:

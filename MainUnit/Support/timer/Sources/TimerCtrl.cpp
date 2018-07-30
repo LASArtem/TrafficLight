@@ -19,7 +19,7 @@ TimerCtrl::TimerCtrl(Timer *tPtr)
 TimerCtrl::~TimerCtrl()
 //-----------------------------------------------------------------------------
 {
-    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s:  denstructor of << %s >>"
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s:  destructor of << %s >>"
         , TXT::TIMER_CTRL, TXT::NAME_TIMER_CTRL);
     sendLog(TXT::message);
 }
