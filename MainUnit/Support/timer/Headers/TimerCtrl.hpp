@@ -16,7 +16,7 @@ public:
 
     //to Timer
     void sendCommandCheckCountTime();
-    void sendResponseCheckCountTime();
+    void sendCommandCountTimeIsFinish();
 
 private:
     void parseCommand(MAIL &mail);
@@ -24,8 +24,6 @@ private:
 
     //from Timer
     void parseResponseFromTimer(MAIL &mail);
-
-
 
     void sendResponseGetCurrentTime();
     void sendResponseStartCountTime();

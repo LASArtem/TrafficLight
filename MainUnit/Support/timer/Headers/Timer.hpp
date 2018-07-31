@@ -21,7 +21,8 @@ public:
 private:
     //send
     void sendCommandCheckCountTime();
-    void sendResponseCheckCountTime();
+    void sendCommandCountTimeIsFinish();
+
 
 private:
     TimerCtrl *mCtlrPtr;

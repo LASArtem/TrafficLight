@@ -2,6 +2,7 @@
 #include <string.h> //memcpy
 
 #include "../../common/api_timer/api_timer.hpp"
+#include "../../common/api_manager/api_manager.hpp"
 #include "../Headers/TimerCtrl.hpp"
 
 //-----------------------------------------------------------------------------
@@ -99,7 +100,6 @@ void TimerCtrl::parseCommand(MAIL &mail)
         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
             , TXT::TIMER_CTRL, "COMMAND_CHECK_COUNT_TIME");
         sendLog(TXT::message);
-        // edd Response
         processCommandCheckCountTime(mail);
         break;
 
@@ -135,13 +135,10 @@ void TimerCtrl::parseResponseFromTimer(MAIL &mail)
         sendResponseStartCountTime();
         break;
 
-
-
     default:
         break;
     }
 }
-
 
 //-----------------------------------------------------------------------------
 void TimerCtrl::sendCommandCheckCountTime()
@@ -161,6 +158,22 @@ void TimerCtrl::sendCommandCheckCountTime()
 
 }
 
+//-----------------------------------------------------------------------------
+void TimerCtrl::sendCommandCountTimeIsFinish()
+//-----------------------------------------------------------------------------
+{
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandCountTimeIsFinish", TXT::TIMER_CTRL);
+    sendLog(TXT::message);
+
+    MAIL mail = {};
+    mail.source = TIMER;
+    mail.destination = MANAGER;
+    mail.typeMail = COMMAND;
+    mail.dataType = static_cast<uint32_t>(COMMAND_COUNT_TIME_IS_FINISHED);
+    mail.dataSize = 0;
+
+    sendMail(mail);
+}
 
 //-----------------------------------------------------------------------------
 void TimerCtrl::sendResponseGetCurrentTime()
@@ -230,25 +243,6 @@ void TimerCtrl::sendResponseCountinueCountTime()
     sendMail(mail);
 }
 
-
-//-----------------------------------------------------------------------------
-void TimerCtrl::sendResponseCheckCountTime()
-//-----------------------------------------------------------------------------
-{
-    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendResponseCheckCountTime", TXT::TIMER_CTRL);
-    sendLog(TXT::message);
-
-    MAIL mail = {};
-    mail.source = TIMER;
-    mail.destination = TIMER;
-    mail.typeMail = RESPONSE;
-    mail.dataType = static_cast<uint32_t>(RESPONSE_CHECK_COUNT_TIME);
-    mail.dataSize = 0;
-
-    sendMail(mail);
-}
-
-
 //-----------------------------------------------------------------------------
 void TimerCtrl::processCommandStartCountTime(MAIL &mail)
 //-----------------------------------------------------------------------------
@@ -271,7 +265,6 @@ void TimerCtrl::processCommandStartCountTime(MAIL &mail)
     }
 }
 
-
 //-----------------------------------------------------------------------------
 void TimerCtrl::processCommandCheckCountTime(MAIL &mail)
 //-----------------------------------------------------------------------------
@@ -284,4 +277,3 @@ void TimerCtrl::processCommandCheckCountTime(MAIL &mail)
         sendLog(TXT::message);
     }
 }
-

@@ -54,19 +54,18 @@ void Timer::notifyStartCountTime(uint32_t seconds)
 
 }
 
-
 //-----------------------------------------------------------------------------
 void Timer::notifyCheckCountTime()
 //-----------------------------------------------------------------------------
 {
     mEndCounter = clock();
-    uint32_t endCheck = mEndCounter + 100.0;
+    uint32_t endCheck = mEndCounter + 500.0;
 
     if((mEndCounter - mStartCounter)/1000.0 >= mCounter){
         mCounter = 0;
         mStartCounter = 0;
         mEndCounter = 0;
-        sendResponseCheckCountTime();
+        sendCommandCountTimeIsFinish();
         return;
     }
 
@@ -77,7 +76,6 @@ void Timer::notifyCheckCountTime()
 
 }
 
-
 //-----------------------------------------------------------------------------
 void Timer::sendCommandCheckCountTime()
 //-----------------------------------------------------------------------------
@@ -87,15 +85,11 @@ void Timer::sendCommandCheckCountTime()
     }
 }
 
-
 //-----------------------------------------------------------------------------
-void Timer::sendResponseCheckCountTime()
+void Timer::sendCommandCountTimeIsFinish()
 //-----------------------------------------------------------------------------
 {
     if(mCtlrPtr !=nullptr){
-        mCtlrPtr->sendResponseCheckCountTime();
+        mCtlrPtr->sendCommandCountTimeIsFinish();
     }
 }
-
-
-
