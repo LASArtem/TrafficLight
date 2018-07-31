@@ -161,7 +161,7 @@ void Manager::notifyUserPressExit()
 void Manager::notifyUserPressStart()
 //-----------------------------------------------------------------------------
 {
-    return;
+    sendCommandStartCountTime();
 }
 
 

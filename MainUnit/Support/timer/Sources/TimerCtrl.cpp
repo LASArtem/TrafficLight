@@ -95,6 +95,14 @@ void TimerCtrl::parseCommand(MAIL &mail)
         sendResponseCountinueCountTime();
         break;
 
+    case COMMAND_CHECK_COUNT_TIME:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+            , TXT::TIMER_CTRL, "COMMAND_CHECK_COUNT_TIME");
+        sendLog(TXT::message);
+        // edd Response
+        processCommandCheckCountTime(mail);
+        break;
+
     default:
         break;
     }
@@ -104,8 +112,55 @@ void TimerCtrl::parseCommand(MAIL &mail)
 void TimerCtrl::parseResponse(MAIL &mail)
 //-----------------------------------------------------------------------------
 {
+    switch (mail.source) {
+
+    case TIMER:
+        parseResponseFromTimer(mail);
+        break;
+
+    default:
+        break;
+    }
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::parseResponseFromTimer(MAIL &mail)
+//-----------------------------------------------------------------------------
+{
+    switch (mail.dataType){
+    case RESPONSE_CHECK_COUNT_TIME:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseResponseFromTimer: %s"
+            , TXT::TIMER_CTRL, "RESPONSE_CHECK_COUNT_TIME");
+        sendLog(TXT::message);
+        sendResponseStartCountTime();
+        break;
+
+
+
+    default:
+        break;
+    }
+}
+
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::sendCommandCheckCountTime()
+//-----------------------------------------------------------------------------
+{
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandCheckCountTime", TXT::TIMER_CTRL);
+    sendLog(TXT::message);
+
+    MAIL mail = {};
+    mail.source = TIMER;
+    mail.destination = TIMER;
+    mail.typeMail = COMMAND;
+    mail.dataType = static_cast<uint32_t>(COMMAND_CHECK_COUNT_TIME);
+    mail.dataSize = 0;
+
+    sendMail(mail);
 
 }
+
 
 //-----------------------------------------------------------------------------
 void TimerCtrl::sendResponseGetCurrentTime()
@@ -175,6 +230,25 @@ void TimerCtrl::sendResponseCountinueCountTime()
     sendMail(mail);
 }
 
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::sendResponseCheckCountTime()
+//-----------------------------------------------------------------------------
+{
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendResponseCheckCountTime", TXT::TIMER_CTRL);
+    sendLog(TXT::message);
+
+    MAIL mail = {};
+    mail.source = TIMER;
+    mail.destination = TIMER;
+    mail.typeMail = RESPONSE;
+    mail.dataType = static_cast<uint32_t>(RESPONSE_CHECK_COUNT_TIME);
+    mail.dataSize = 0;
+
+    sendMail(mail);
+}
+
+
 //-----------------------------------------------------------------------------
 void TimerCtrl::processCommandStartCountTime(MAIL &mail)
 //-----------------------------------------------------------------------------
@@ -196,3 +270,18 @@ void TimerCtrl::processCommandStartCountTime(MAIL &mail)
         sendLog(TXT::message);
     }
 }
+
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::processCommandCheckCountTime(MAIL &mail)
+//-----------------------------------------------------------------------------
+{
+    if (mTimerPtr != nullptr) {
+        mTimerPtr->notifyCheckCountTime();
+    } else {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandCheckCountTime: %s"
+            , TXT::TIMER_CTRL, "mTimerPtr != nullptr");
+        sendLog(TXT::message);
+    }
+}
+
