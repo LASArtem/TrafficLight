@@ -1,4 +1,5 @@
 #include <stdio.h> //printf
+#include <string.h> //memcpy
 
 #include "../../common/api_timer/api_timer.hpp"
 #include "../Headers/TimerCtrl.hpp"

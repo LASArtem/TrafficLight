@@ -118,6 +118,12 @@ void ManagerCtrl::parseCommandFromKeyBoard(MAIL &mail)
         sendLog(TXT::message);
         processCommandUserPressExit();
         break;
+    case COMMAND_USER_PRESS_START:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommandFromKeyBoard: %s"
+            , TXT::MANAGER_CTRL, "COMMAND_USER_PRESS_START");
+        sendLog(TXT::message);
+        processCommandUserPressStart();
+        break;
 
     default:
         break;
@@ -341,7 +347,7 @@ void ManagerCtrl::sendCommandStartCountTime(uint32_t sec)
     mail.typeMail = COMMAND;
     mail.dataType = static_cast<uint32_t>(COMMAND_START_COUNT_TIME);
     mail.dataSize = sizeof(uint32_t);
-    memcpy(mail.data, &sec, sizeof(uint32_t);
+    memcpy(mail.data, &sec, sizeof(uint32_t));
 
     sendMail(mail);
 }
@@ -414,6 +420,25 @@ void ManagerCtrl::processCommandUserPressExit()
 
     mManagerPtr->notifyUserPressExit();
 }
+
+
+//-----------------------------------------------------------------------------
+void ManagerCtrl::processCommandUserPressStart()
+//-----------------------------------------------------------------------------
+{
+    if (mManagerPtr == nullptr) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandUserPressStart: %s"
+            , TXT::MANAGER_CTRL, "mManagerPtr = nullptr");
+        sendLog(TXT::message);
+        return;
+    }
+
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: processCommandUserPressStart", TXT::MANAGER_CTRL);
+    sendLog(TXT::message);
+
+    mManagerPtr->notifyUserPressStart();
+}
+
 
 //-----------------------------------------------------------------------------
 void ManagerCtrl::processResponseGetCurrentColorState(MAIL &mail)
