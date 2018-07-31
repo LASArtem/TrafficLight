@@ -60,7 +60,7 @@ void Timer::notifyCheckCountTime()
 //-----------------------------------------------------------------------------
 {
     mEndCounter = clock();
-    uint32_t endCheck = mEndCounter + 500.0;
+    uint32_t endCheck = mEndCounter + 100.0;
 
     if((mEndCounter - mStartCounter)/1000.0 >= mCounter){
         mCounter = 0;
@@ -74,9 +74,6 @@ void Timer::notifyCheckCountTime()
         mEndCounter = clock();
     }
     sendCommandCheckCountTime();
-
-
-
 
 }
 
