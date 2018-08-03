@@ -22,7 +22,7 @@ public:
 
     //to Timer
     void sendCommandGetCurrentTime();
-    void sendCommandStartCountTime();
+    void sendCommandStartCountTime(uint32_t sec);
     void sendCommandPauseCountTime();
     void sendCommandContinueCountTime();
 
@@ -43,6 +43,7 @@ private:
 
     //process
     void processCommandUserPressExit();
+    void processCommandUserPressStart();
     void processResponseGetCurrentColorState(MAIL &mail);
 
 private:

@@ -54,10 +54,11 @@ void MailOffice::pushMail(MAIL &mail)
 void MailOffice::processMails()
 //-----------------------------------------------------------------------------
 {
-    while (!mMails.empty()) {
+    if(!mMails.empty()) {
         sendMailToSubscribers(mMails.front());
         mMails.pop();
     }
+
 }
 
 //-----------------------------------------------------------------------------
