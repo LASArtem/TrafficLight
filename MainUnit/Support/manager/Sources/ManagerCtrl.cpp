@@ -118,6 +118,18 @@ void ManagerCtrl::parseCommandFromKeyBoard(MAIL &mail)
         sendLog(TXT::message);
         processCommandUserPressExit();
         break;
+    case COMMAND_USER_PRESS_START:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommandFromKeyBoard: %s"
+            , TXT::MANAGER_CTRL, "COMMAND_USER_PRESS_START");
+        sendLog(TXT::message);
+        processCommandUserPressStart();
+        break;
+    case COMMAND_USER_PRESS_PAUSE:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommandFromKeyBoard: %s"
+            , TXT::MANAGER_CTRL, "COMMAND_USER_PRESS_PAUSE");
+        sendLog(TXT::message);
+        processCommandUserPressPause();
+        break;
 
     default:
         break;
@@ -329,7 +341,7 @@ void ManagerCtrl::sendCommandGetCurrentTime()
 }
 
 //-----------------------------------------------------------------------------
-void ManagerCtrl::sendCommandStartCountTime()
+void ManagerCtrl::sendCommandStartCountTime(uint32_t sec)
 //-----------------------------------------------------------------------------
 {
     snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandStartCountTime", TXT::MANAGER_CTRL);
@@ -340,7 +352,8 @@ void ManagerCtrl::sendCommandStartCountTime()
     mail.destination = TIMER;
     mail.typeMail = COMMAND;
     mail.dataType = static_cast<uint32_t>(COMMAND_START_COUNT_TIME);
-    mail.dataSize = 0;
+    mail.dataSize = sizeof(uint32_t);
+    memcpy(mail.data, &sec, sizeof(uint32_t));
 
     sendMail(mail);
 }
@@ -412,6 +425,41 @@ void ManagerCtrl::processCommandUserPressExit()
     sendLog(TXT::message);
 
     mManagerPtr->notifyUserPressExit();
+}
+
+
+//-----------------------------------------------------------------------------
+void ManagerCtrl::processCommandUserPressStart()
+//-----------------------------------------------------------------------------
+{
+    if (mManagerPtr == nullptr) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandUserPressStart: %s"
+            , TXT::MANAGER_CTRL, "mManagerPtr = nullptr");
+        sendLog(TXT::message);
+        return;
+    }
+
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: processCommandUserPressStart", TXT::MANAGER_CTRL);
+    sendLog(TXT::message);
+
+    mManagerPtr->notifyUserPressStart();
+}
+
+//-----------------------------------------------------------------------------
+void ManagerCtrl::processCommandUserPressPause()
+//-----------------------------------------------------------------------------
+{
+    if (mManagerPtr == nullptr) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandUserPressPause: %s"
+            , TXT::MANAGER_CTRL, "mManagerPtr = nullptr");
+        sendLog(TXT::message);
+        return;
+    }
+
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: processCommandUserPressPause", TXT::MANAGER_CTRL);
+    sendLog(TXT::message);
+
+    mManagerPtr->notifyUserPressPause();
 }
 
 //-----------------------------------------------------------------------------
