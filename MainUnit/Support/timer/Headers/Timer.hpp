@@ -17,11 +17,18 @@ public:
     //notify
     void notifyStartCountTime(uint32_t seconds);
     void notifyCheckCountTime();
+    void notifyPauseCountTime();
+    void notifyStartPauseCountTime();
+    void notifyEndPauseCountTime();
 
 private:
     //send
     void sendCommandCheckCountTime();
     void sendCommandCountTimeIsFinish();
+    void sendCommandStartPauseTime();
+    void sendCommandEndPauseTime();
+
+
 
 
 private:
@@ -29,6 +36,7 @@ private:
     uint32_t mCounter;
     uint32_t mStartCounter;
     uint32_t mEndCounter;
+    bool mPause;
 };
 
 #endif //TIMER_HPP

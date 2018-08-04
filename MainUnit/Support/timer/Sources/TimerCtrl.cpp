@@ -66,46 +66,91 @@ void TimerCtrl::processMail(MAIL &mail)
 void TimerCtrl::parseCommand(MAIL &mail)
 //-----------------------------------------------------------------------------
 {
-    switch (mail.dataType){
-    case COMMAND_GET_CURRENT_TIME:
-        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
-            , TXT::TIMER_CTRL, "COMMAND_GET_CURRENT_TIME");
-        sendLog(TXT::message);
-        sendResponseGetCurrentTime();
+    switch (mail.source) {
+    case MANAGER:
+        parseCommandFromManager(mail);
         break;
 
-    case COMMAND_START_COUNT_TIME:
-        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
-            , TXT::TIMER_CTRL, "COMMAND_START_COUNT_TIME");
-        sendLog(TXT::message);
-        sendResponseStartCountTime();
-        processCommandStartCountTime(mail);
-        break;
-
-    case COMMAND_PAUSE_COUNT_TIME:
-        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
-            , TXT::TIMER_CTRL, "COMMAND_PAUSE_COUNT_TIME");
-        sendLog(TXT::message);
-        sendResponsePauseCountTime();
-        break;
-
-    case COMMAND_CONTINUE_COUNT_TIME:
-        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
-            , TXT::TIMER_CTRL, "COMMAND_CONTINUE_COUNT_TIME");
-        sendLog(TXT::message);
-        sendResponseCountinueCountTime();
-        break;
-
-    case COMMAND_CHECK_COUNT_TIME:
-        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
-            , TXT::TIMER_CTRL, "COMMAND_CHECK_COUNT_TIME");
-        sendLog(TXT::message);
-        processCommandCheckCountTime(mail);
+    case TIMER:
+        parseCommandFromTimer(mail);
         break;
 
     default:
         break;
     }
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::parseCommandFromManager(MAIL &mail)
+//-----------------------------------------------------------------------------
+{
+    switch (mail.dataType){
+
+     case COMMAND_GET_CURRENT_TIME:
+         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+             , TXT::TIMER_CTRL, "COMMAND_GET_CURRENT_TIME");
+         sendLog(TXT::message);
+         sendResponseGetCurrentTime();
+         break;
+
+     case COMMAND_START_COUNT_TIME:
+         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+             , TXT::TIMER_CTRL, "COMMAND_START_COUNT_TIME");
+         sendLog(TXT::message);
+         sendResponseStartCountTime();
+         processCommandStartCountTime(mail);
+         break;
+
+     case COMMAND_PAUSE_COUNT_TIME:
+         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+             , TXT::TIMER_CTRL, "COMMAND_PAUSE_COUNT_TIME");
+         sendLog(TXT::message);
+         //sendResponsePauseCountTime();
+         processCommandPauseCountTime();
+         break;
+
+     case COMMAND_CONTINUE_COUNT_TIME:
+         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+             , TXT::TIMER_CTRL, "COMMAND_CONTINUE_COUNT_TIME");
+         sendLog(TXT::message);
+         sendResponseCountinueCountTime();
+         break;
+
+     default:
+         break;
+     }
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::parseCommandFromTimer(MAIL &mail)
+//-----------------------------------------------------------------------------
+{
+    switch (mail.dataType){
+
+     case COMMAND_CHECK_COUNT_TIME:
+         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+             , TXT::TIMER_CTRL, "COMMAND_CHECK_COUNT_TIME");
+         sendLog(TXT::message);
+         processCommandCheckCountTime();
+         break;
+
+    case COMMAND_START_PAUSE_TIMER:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+            , TXT::TIMER_CTRL, "COMMAND_START_PAUSE_TIMER");
+        sendLog(TXT::message);
+        processCommandStartPauseTime();
+        break;
+
+    case COMMAND_END_PAUSE_TIMER:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommand: %s"
+            , TXT::TIMER_CTRL, "COMMAND_END_PAUSE_TIMER");
+        sendLog(TXT::message);
+        //processCommandCheckCountTime(mail);
+        break;
+
+     default:
+         break;
+     }
 }
 
 //-----------------------------------------------------------------------------
@@ -170,6 +215,40 @@ void TimerCtrl::sendCommandCountTimeIsFinish()
     mail.destination = MANAGER;
     mail.typeMail = COMMAND;
     mail.dataType = static_cast<uint32_t>(COMMAND_COUNT_TIME_IS_FINISHED);
+    mail.dataSize = 0;
+
+    sendMail(mail);
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::sendCommandStartPauseTime()
+//-----------------------------------------------------------------------------
+{
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandStartPauseTime", TXT::TIMER_CTRL);
+    sendLog(TXT::message);
+
+    MAIL mail = {};
+    mail.source = TIMER;
+    mail.destination = TIMER;
+    mail.typeMail = COMMAND;
+    mail.dataType = static_cast<uint32_t>(COMMAND_START_PAUSE_TIMER);
+    mail.dataSize = 0;
+
+    sendMail(mail);
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::sendCommandEndPauseTime()
+//-----------------------------------------------------------------------------
+{
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: sendCommandEndPauseTime", TXT::TIMER_CTRL);
+    sendLog(TXT::message);
+
+    MAIL mail = {};
+    mail.source = TIMER;
+    mail.destination = TIMER;
+    mail.typeMail = COMMAND;
+    mail.dataType = static_cast<uint32_t>(COMMAND_END_PAUSE_TIMER);
     mail.dataSize = 0;
 
     sendMail(mail);
@@ -266,13 +345,39 @@ void TimerCtrl::processCommandStartCountTime(MAIL &mail)
 }
 
 //-----------------------------------------------------------------------------
-void TimerCtrl::processCommandCheckCountTime(MAIL &mail)
+void TimerCtrl::processCommandCheckCountTime()
 //-----------------------------------------------------------------------------
 {
     if (mTimerPtr != nullptr) {
         mTimerPtr->notifyCheckCountTime();
     } else {
         snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandCheckCountTime: %s"
+            , TXT::TIMER_CTRL, "mTimerPtr != nullptr");
+        sendLog(TXT::message);
+    }
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::processCommandPauseCountTime()
+//-----------------------------------------------------------------------------
+{
+    if (mTimerPtr != nullptr) {
+        mTimerPtr->notifyPauseCountTime();
+    } else {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandPauseCountTime: %s"
+            , TXT::TIMER_CTRL, "mTimerPtr != nullptr");
+        sendLog(TXT::message);
+    }
+}
+
+//-----------------------------------------------------------------------------
+void TimerCtrl::processCommandStartPauseTime()
+//-----------------------------------------------------------------------------
+{
+    if (mTimerPtr != nullptr) {
+        mTimerPtr->notifyStartPauseCountTime();
+    } else {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandStartPauseTime: %s"
             , TXT::TIMER_CTRL, "mTimerPtr != nullptr");
         sendLog(TXT::message);
     }

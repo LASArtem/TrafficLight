@@ -17,10 +17,15 @@ public:
     //to Timer
     void sendCommandCheckCountTime();
     void sendCommandCountTimeIsFinish();
+    void sendCommandStartPauseTime();
+    void sendCommandEndPauseTime();
 
 private:
     void parseCommand(MAIL &mail);
     void parseResponse(MAIL &mail);
+
+    void parseCommandFromManager(MAIL &mail);
+    void parseCommandFromTimer(MAIL &mail);
 
     //from Timer
     void parseResponseFromTimer(MAIL &mail);
@@ -32,7 +37,9 @@ private:
 
 
     void processCommandStartCountTime(MAIL &mail);
-    void processCommandCheckCountTime(MAIL &mail);
+    void processCommandCheckCountTime();
+    void processCommandPauseCountTime();
+    void processCommandStartPauseTime();
 
 private:
     Timer *mTimerPtr;
