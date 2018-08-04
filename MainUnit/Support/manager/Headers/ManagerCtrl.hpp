@@ -44,6 +44,7 @@ private:
     //process
     void processCommandUserPressExit();
     void processCommandUserPressStart();
+    void processCommandUserPressPause();
     void processResponseGetCurrentColorState(MAIL &mail);
 
 private:
