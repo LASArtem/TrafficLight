@@ -124,6 +124,12 @@ void ManagerCtrl::parseCommandFromKeyBoard(MAIL &mail)
         sendLog(TXT::message);
         processCommandUserPressStart();
         break;
+    case COMMAND_USER_PRESS_PAUSE:
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: parseCommandFromKeyBoard: %s"
+            , TXT::MANAGER_CTRL, "COMMAND_USER_PRESS_PAUSE");
+        sendLog(TXT::message);
+        processCommandUserPressPause();
+        break;
 
     default:
         break;
@@ -439,6 +445,22 @@ void ManagerCtrl::processCommandUserPressStart()
     mManagerPtr->notifyUserPressStart();
 }
 
+//-----------------------------------------------------------------------------
+void ManagerCtrl::processCommandUserPressPause()
+//-----------------------------------------------------------------------------
+{
+    if (mManagerPtr == nullptr) {
+        snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: ERROR: processCommandUserPressPause: %s"
+            , TXT::MANAGER_CTRL, "mManagerPtr = nullptr");
+        sendLog(TXT::message);
+        return;
+    }
+
+    snprintf(TXT::message, TXT::BUFFER_SIZE, "%s: processCommandUserPressPause", TXT::MANAGER_CTRL);
+    sendLog(TXT::message);
+
+    mManagerPtr->notifyUserPressPause();
+}
 
 //-----------------------------------------------------------------------------
 void ManagerCtrl::processResponseGetCurrentColorState(MAIL &mail)

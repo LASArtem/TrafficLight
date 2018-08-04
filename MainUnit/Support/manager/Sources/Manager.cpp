@@ -164,5 +164,12 @@ void Manager::notifyUserPressStart()
     sendCommandStartCountTime();
 }
 
+//-----------------------------------------------------------------------------
+void Manager::notifyUserPressPause()
+//-----------------------------------------------------------------------------
+{
+
+}
+
 
 
