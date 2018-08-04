@@ -29,6 +29,8 @@ public:
     //notify
     void notifyGetCurrentColourState(uint32_t colour);
     void notifyUserPressExit();
+    void notifyUserPressStart();
+    void notifyUserPressPause();
 
 private:
     ManagerCtrl *mCtlrPtr;

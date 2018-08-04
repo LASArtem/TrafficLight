@@ -91,7 +91,7 @@ void Manager::sendCommandStartCountTime()
 //-----------------------------------------------------------------------------
 {
     if (mCtlrPtr != nullptr) {
-        mCtlrPtr->sendCommandStartCountTime();
+        mCtlrPtr->sendCommandStartCountTime(3/*seconds*/);
     }
 }
 
@@ -156,3 +156,20 @@ void Manager::notifyUserPressExit()
 {
     mIsExit = true;
 }
+
+//-----------------------------------------------------------------------------
+void Manager::notifyUserPressStart()
+//-----------------------------------------------------------------------------
+{
+    sendCommandStartCountTime();
+}
+
+//-----------------------------------------------------------------------------
+void Manager::notifyUserPressPause()
+//-----------------------------------------------------------------------------
+{
+
+}
+
+
+
