@@ -168,7 +168,7 @@ void Manager::notifyUserPressStart()
 void Manager::notifyUserPressPause()
 //-----------------------------------------------------------------------------
 {
-
+    sendCommandPauseCountTime();
 }
 
 
